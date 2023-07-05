@@ -28,4 +28,10 @@ public class Menu : MonoBehaviour
         // Carregando a cena Game
         SceneManager.LoadScene(NomeCena);
     }
+
+    public void QuitGame()
+    {
+        UnityEditor.EditorApplication.isPlaying = false;
+
+    }
 }
