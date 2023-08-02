@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     // Posição inicial do player
     private Vector3 posInicial;
     // Velocidade
-    private float speed;
+    private float speed = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         rig.velocity = new Vector2(speed, rig.position.y);
+        rig.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rig.velocity.y);
 
         if (Input.GetKeyDown(KeyCode.A) && transform.localScale.x > 0) 
         {
