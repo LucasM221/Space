@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
     private Vector3 posInicial;
     // Velocidade
     private float speed = 5;
+    // Pulo
+    // private bool isJumping = false;
+    private float JumpForce = 16;
     // Animator
     public Animator animator;
     // Start is called before the first frame update
@@ -34,6 +37,13 @@ public class Player : MonoBehaviour
         {
             animator.SetBool("isMoving", false);
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rig.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
+            Debug.Log("Jump");
+        }
+
         if (Input.GetKeyDown(KeyCode.A) && transform.localScale.x > 0) 
         {
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
