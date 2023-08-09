@@ -2,33 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Player : MonoBehaviour
-{   
-    // rigidBody
+
+{
+    //variavel para o rigidBody
     private Rigidbody2D rig;
-    // Posição inicial do player
+    //vetor da posicao Inicial do Player
     private Vector3 posInicial;
-    // Velocidade
+    //variavel da velocidade
     private float speed = 5;
-    // Pulo
-    // private bool isJumping = false;
-    private float JumpForce = 16;
-    // Animator
+    //componente animator
     public Animator animator;
-    // Start is called before the first frame update
+    public bool isJumping;
+    private float JumpForce = 8;
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
-        posInicial = new Vector3(0f, -2.3f, 0f);
+        posInicial = new Vector3(-0.83f, -0.42f, 0f);
         transform.position = posInicial;
     }
 
     // Update is called once per frame
     void Update()
     {
-        rig.velocity = new Vector2(speed, rig.position.y);
-        rig.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rig.velocity.y);
 
+        rig.velocity = new Vector2(speed, rig.velocity.y);
+        rig.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rig.velocity.y);
         if (Input.GetAxis("Horizontal") != 0)
         {
             animator.SetBool("isMoving", true);
@@ -38,21 +38,28 @@ public class Player : MonoBehaviour
             animator.SetBool("isMoving", false);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        //verifica se a tecla espaço foi pressionada
+        if (Input.GetKeyDown(KeyCode.Space) && isJumping == false)
         {
             rig.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
-            Debug.Log("Jump");
         }
 
-        if (Input.GetKeyDown(KeyCode.A) && transform.localScale.x > 0) 
+        //verifica se a tecla A foi pressionada
+        if (Input.GetKeyDown(KeyCode.A) && transform.localScale.x > 0)
+              
         {
-            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-            Debug.Log("Tecla A pressionada.");
+            transform.localScale = new Vector3(transform.localScale.x * -1,
+            transform.localScale.y, transform.localScale.z);
+            //Debug.Log("Tecla A pressionada")
         }
+
+        //verifica se a tecla D foi pressionada
         if (Input.GetKeyDown(KeyCode.D) && transform.localScale.x < 0)
         {
-            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-            Debug.Log("Tecla D pressionada.");
+
+            transform.localScale = new Vector3(transform.localScale.x * -1,
+            transform.localScale.y, transform.localScale.z);
+            //Debug.Log("Tecla D pressionada")
         }
-    }   
+    }
 }
