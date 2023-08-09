@@ -62,4 +62,21 @@ public class Player : MonoBehaviour
             //Debug.Log("Tecla D pressionada")
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //verifica a tag line
+        if(collision.gameObject.CompareTag("Line"))
+        {
+            Debug.Log("morri!");
+            //retorna o personagem para a posicao inicial
+            transform.position = posInicial;
+        }
+        //verifica checkpoint
+        if (collision.gameObject.CompareTag("Checkpoint"))
+        {
+            Debug.Log("Checkpoint.");
+            //modifica posicao inicial para checkpoint
+            posInicial = collision.gameObject.transform.position;
+        }
+    }
 }
